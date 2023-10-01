@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.GitHubUser" parent="Theme.Material3.DayNight.NoActionBar">
+    </style>
+
+    <style name="Theme.GitHubUser" parent="Base.Theme.GitHubUser" />
+    <style name="bg_items">
+        <item name="android:background">@color/lightgrey</item>
+    </style>
+</resources>
