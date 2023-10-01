@@ -8,18 +8,17 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.ardine.githubuser.data.local.entity.FavoriteUser
-import com.ardine.githubuser.data.remote.response.User
 
 @Dao
 interface FavoriteUserDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(user: User)
+    fun insert(favoriteUser: FavoriteUser)
 
     @Update
-    fun update(user: User)
+    fun update(favoriteUser: FavoriteUser)
 
     @Delete
-    fun delete(user: User)
+    fun delete(favoriteUser: FavoriteUser)
 
     @Query("SELECT * FROM FavoriteUser WHERE username = :username")
     fun getFavoriteUserByUsername(username: String): LiveData<FavoriteUser>

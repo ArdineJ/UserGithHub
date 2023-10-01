@@ -3,7 +3,6 @@ package com.ardine.githubuser.ui
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.ardine.githubuser.R
@@ -28,6 +27,8 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityDetailBinding
     private lateinit var detailViewModel: DetailViewModel
+
+    private var isFavorite = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,16 +62,13 @@ class DetailActivity : AppCompatActivity() {
 
         val btnFavorite: FloatingActionButton = binding.btnFavorite
         btnFavorite.setOnClickListener {
-            val isFavorite = btnFavorite.getTag(R.id.favorite_tag) as? Boolean ?: false
+            // Toggle the favorite state
+            isFavorite = !isFavorite
 
             if (isFavorite) {
-                btnFavorite.setBackgroundColor(ContextCompat.getColor(this, R.color.darkgrey))
-                btnFavorite.setImageResource(R.drawable.ic_heart_black_outline)
-                btnFavorite.setTag(R.id.favorite_tag, false)
+                btnFavorite.setImageResource(R.drawable.ic_heart_pink)
             } else {
-                btnFavorite.setBackgroundColor(ContextCompat.getColor(this, R.color.favoriteColor))
-                btnFavorite.setImageResource(R.drawable.ic_heart_filled)
-                btnFavorite.setTag(R.id.favorite_tag, true)
+                btnFavorite.setImageResource(R.drawable.ic_heart_black_outline)
             }
         }
     }
