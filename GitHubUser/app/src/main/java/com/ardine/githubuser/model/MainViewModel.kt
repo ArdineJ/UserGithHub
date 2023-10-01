@@ -1,12 +1,12 @@
 package com.ardine.githubuser.model
 
+import com.ardine.githubuser.data.remote.api.ApiConfig
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ardine.githubuser.data.local.entity.User
-import com.ardine.githubuser.data.remote.api.ApiConfig
 import com.ardine.githubuser.data.remote.response.GithhubResponse
+import com.ardine.githubuser.data.remote.response.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

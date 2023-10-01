@@ -1,8 +1,8 @@
 package com.ardine.githubuser.data.remote.api
 
-import com.ardine.githubuser.data.local.entity.User
 import com.ardine.githubuser.data.remote.response.DetailUserResponse
 import com.ardine.githubuser.data.remote.response.GithhubResponse
+import com.ardine.githubuser.data.remote.response.User
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

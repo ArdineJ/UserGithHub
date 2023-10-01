@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ardine.githubuser.adapter.UserListAdapter
-import com.ardine.githubuser.data.local.entity.User
+import com.ardine.githubuser.data.remote.response.User
 import com.ardine.githubuser.databinding.FragmentFollowersBinding
 import com.ardine.githubuser.model.FollowersViewModel
 

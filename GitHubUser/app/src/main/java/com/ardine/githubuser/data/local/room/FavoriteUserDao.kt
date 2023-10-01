@@ -7,7 +7,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.ardine.githubuser.data.local.entity.User
+import com.ardine.githubuser.data.local.entity.FavoriteUser
+import com.ardine.githubuser.data.remote.response.User
 
 @Dao
 interface FavoriteUserDao {
@@ -20,6 +21,6 @@ interface FavoriteUserDao {
     @Delete
     fun delete(user: User)
 
-    @Query("SELECT * FROM users WHERE id = :id ORDER BY id ASC")
-    fun getFavoriteUserById(id: Int): LiveData<List<User>>
+    @Query("SELECT * FROM FavoriteUser WHERE username = :username")
+    fun getFavoriteUserByUsername(username: String): LiveData<FavoriteUser>
 }

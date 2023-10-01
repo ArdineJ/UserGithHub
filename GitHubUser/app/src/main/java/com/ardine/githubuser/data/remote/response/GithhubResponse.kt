@@ -1,6 +1,5 @@
 package com.ardine.githubuser.data.remote.response
 
-import com.ardine.githubuser.data.local.entity.User
 import com.google.gson.annotations.SerializedName
 
 data class GithhubResponse(

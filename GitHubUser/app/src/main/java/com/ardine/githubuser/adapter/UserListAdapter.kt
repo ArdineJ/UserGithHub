@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ardine.githubuser.R
-import com.ardine.githubuser.data.local.entity.User
+import com.ardine.githubuser.data.remote.response.User
 import com.ardine.githubuser.databinding.ItemUserBinding
 import com.ardine.githubuser.ui.DetailActivity
 import com.bumptech.glide.Glide

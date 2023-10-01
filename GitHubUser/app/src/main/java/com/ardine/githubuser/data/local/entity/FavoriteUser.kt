@@ -7,14 +7,14 @@ import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-@Entity(tableName = "users")
-data class User(
+@Entity(tableName = "FavoriteUser")
+data class FavoriteUser(
     @PrimaryKey(autoGenerate = false)
     val id:Int?,
-    @ColumnInfo(name = "login")
-    val login: String?,
+    @ColumnInfo(name = "username")
+    var username: String = "",
     @ColumnInfo(name = "avatar_url")
-    val avatarUrl: String?,
+    val avatarUrl: String? = null,
     @ColumnInfo(name = "followers_url")
     val followersUrl: String?,
     @ColumnInfo(name = "following_url")

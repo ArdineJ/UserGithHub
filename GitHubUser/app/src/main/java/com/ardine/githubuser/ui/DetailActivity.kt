@@ -8,11 +8,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.ardine.githubuser.R
 import com.ardine.githubuser.adapter.SectionPagerAdapter
-import com.ardine.githubuser.data.local.DbModule
 import com.ardine.githubuser.data.remote.response.DetailUserResponse
 import com.ardine.githubuser.databinding.ActivityDetailBinding
 import com.ardine.githubuser.model.DetailViewModel
-import com.ardine.githubuser.model.ViewModelFactory
 import com.bumptech.glide.Glide
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
@@ -30,14 +28,13 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityDetailBinding
     private lateinit var detailViewModel: DetailViewModel
-    var isFavorite = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        detailViewModel = ViewModelProvider(this, ViewModelFactory(DbModule(this)))[DetailViewModel::class.java]
+        detailViewModel = ViewModelProvider(this)[DetailViewModel::class.java]
 
         val username = intent.getStringExtra(EXTRA_USERNAME)
         if (username!= null){
@@ -64,28 +61,18 @@ class DetailActivity : AppCompatActivity() {
 
         val btnFavorite: FloatingActionButton = binding.btnFavorite
         btnFavorite.setOnClickListener {
-            val newFavoriteStatus = !isFavorite
+            val isFavorite = btnFavorite.getTag(R.id.favorite_tag) as? Boolean ?: false
 
-            if (newFavoriteStatus) {
-                btnFavorite.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        btnFavorite.context,
-                        R.drawable.ic_heart_pink
-                    )
-                )
+            if (isFavorite) {
+                btnFavorite.setBackgroundColor(ContextCompat.getColor(this, R.color.darkgrey))
+                btnFavorite.setImageResource(R.drawable.ic_heart_black_outline)
+                btnFavorite.setTag(R.id.favorite_tag, false)
             } else {
-                btnFavorite.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        btnFavorite.context,
-                        R.drawable.ic_heart_black
-                    )
-                )
+                btnFavorite.setBackgroundColor(ContextCompat.getColor(this, R.color.favoriteColor))
+                btnFavorite.setImageResource(R.drawable.ic_heart_filled)
+                btnFavorite.setTag(R.id.favorite_tag, true)
             }
-
-            isFavorite = newFavoriteStatus
         }
-
-        TODO("Favorite")
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
