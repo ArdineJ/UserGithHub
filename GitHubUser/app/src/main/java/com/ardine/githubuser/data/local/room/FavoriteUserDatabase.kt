@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.ardine.githubuser.data.local.entity.FavoriteUser
 
-@Database(entities = [FavoriteUser::class], version = 1)
+@Database(entities = [FavoriteUser::class], version = 2)
 abstract class FavoriteUserDatabase : RoomDatabase() {
     abstract fun FavoriteUserDao(): FavoriteUserDao
 
@@ -20,6 +20,7 @@ abstract class FavoriteUserDatabase : RoomDatabase() {
                 synchronized(FavoriteUserDatabase::class.java){
                     INSTANCE = Room.databaseBuilder(context.applicationContext,
                         FavoriteUserDatabase::class.java, "favoritUser_database")
+                        .fallbackToDestructiveMigration()
                         .build()
                 }
             }

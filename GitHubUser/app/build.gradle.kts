@@ -47,6 +47,8 @@ android {
 dependencies {
     implementation ("de.hdodenhof:circleimageview:3.1.0")
 
+    implementation ("androidx.activity:activity-ktx:1.7.2")
+
     implementation("androidx.datastore:datastore-preferences:1.0.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
