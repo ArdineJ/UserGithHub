@@ -1,6 +1,6 @@
 package com.ardine.githubuser.data.remote.api
 
-import de.hdodenhof.circleimageview.BuildConfig
+import com.ardine.githubuser.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -9,9 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
     companion object{
-        private const val TOKEN = "token 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"
-        private const val BASE_URL = "https://api.github.com/"
-
+        private const val TOKEN = BuildConfig.KEY
         fun getApiService(): ApiService {
             val loggingInterceptor = if(BuildConfig.DEBUG) {
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -30,7 +28,7 @@ class ApiConfig {
                 .addInterceptor(authInterceptor)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

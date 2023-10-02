@@ -5,8 +5,6 @@ plugins {
     id("kotlin-parcelize")
 }
 
-val TOKEN = "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"
-
 android {
     namespace = "com.ardine.githubuser"
     compileSdk = 34
@@ -18,7 +16,8 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-//        buildConfigField("String", "KEY", 'TOKEN')
+        buildConfigField("String", "KEY", "\"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\"")
+        buildConfigField("String", "BASE_URL", "\"https://api.github.com\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
