@@ -15,6 +15,8 @@ class DetailViewModel :ViewModel(){
     private val _detailUser = MutableLiveData<DetailUserResponse>()
     val detailUser: LiveData<DetailUserResponse> = _detailUser
 
+    private val _isfailed = MutableLiveData<String>()
+    val isfailed : LiveData<String> = _isfailed
     fun findUser(username:String){
         val client = ApiConfig.getApiService().getUserDetails(username)
         client.enqueue(object : Callback<DetailUserResponse>{
@@ -29,6 +31,7 @@ class DetailViewModel :ViewModel(){
 
             override fun onFailure(call: Call<DetailUserResponse>, t: Throwable) {
                 t.message?.let{ Log.d("failure", it)}
+                _isfailed.value = "Failed to Load Data"
             }
 
         })

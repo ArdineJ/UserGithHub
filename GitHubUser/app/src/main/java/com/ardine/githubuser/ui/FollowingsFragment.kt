@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -48,6 +49,7 @@ class FollowingsFragment : Fragment() {
         if (binding == null || rvUsersFollowing == null) {
             return
         }
+
         val layoutManager = LinearLayoutManager(requireActivity())
         binding.rvUsersFollowing.layoutManager = layoutManager
 
@@ -55,6 +57,12 @@ class FollowingsFragment : Fragment() {
 
         followingsViewModel.isLoadingFollowing.observe(viewLifecycleOwner) { isLoading ->
             showLoading(isLoading)
+        }
+
+        followingsViewModel.isfailed.observe(viewLifecycleOwner) { errorMessage ->
+            if (!errorMessage.isNullOrEmpty()) {
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+            }
         }
 
         followingsViewModel.followingUser.observe(viewLifecycleOwner) { items ->

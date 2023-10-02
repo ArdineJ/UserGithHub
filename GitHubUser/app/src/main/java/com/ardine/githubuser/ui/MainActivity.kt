@@ -3,6 +3,7 @@ package com.ardine.githubuser.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
@@ -37,6 +38,10 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.isLoading.observe(this){
             showLoading(it)
+        }
+
+        mainViewModel.isfailed.observe(this){
+            Toast.makeText(this,it,Toast.LENGTH_SHORT).show()
         }
 
         with(binding){

@@ -17,6 +17,8 @@ class FollowingsViewModel : ViewModel() {
     private val _isLoadingFollowing = MutableLiveData<Boolean>()
     val isLoadingFollowing:LiveData<Boolean> = _isLoadingFollowing
 
+    private val _isfailed = MutableLiveData<String>()
+    val isfailed : LiveData<String> = _isfailed
     fun getFollowingUser(username:String?){
         _isLoadingFollowing.value = true
 
@@ -32,6 +34,7 @@ class FollowingsViewModel : ViewModel() {
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
                 _isLoadingFollowing.value = false
                 t.message?.let { Log.d("failure", it) }
+                _isfailed.value = "Failed to Load Data"
             }
         })
     }

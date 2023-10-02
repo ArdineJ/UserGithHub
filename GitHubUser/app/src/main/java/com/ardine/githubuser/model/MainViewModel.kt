@@ -22,6 +22,8 @@ class MainViewModel : ViewModel() {
     private val _listUsers = MutableLiveData<List<User>>()
     val listUsers : LiveData<List<User>> = _listUsers
 
+    private val _isfailed = MutableLiveData<String>()
+    val isfailed : LiveData<String> = _isfailed
     init {
         searchUser(USERNAME)
     }
@@ -43,6 +45,7 @@ class MainViewModel : ViewModel() {
             override fun onFailure(call: Call<GithhubResponse>, t: Throwable) {
                 _isLoading.value = false
                 t.message?.let{Log.d("failure", it)}
+                _isfailed.value = "Failed to Load Data"
             }
         })
     }
