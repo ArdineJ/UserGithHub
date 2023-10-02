@@ -9,4 +9,9 @@
     <string name="_100">100</string>
     <string name="followers">Followers</string>
     <string name="following">Following</string>
+
+    <string name="dark_mode">Dark Mode</string>
+
+    <string name="menu_1">Menu 1</string>
+    <string name="menu_2">Setting</string>
 </resources>

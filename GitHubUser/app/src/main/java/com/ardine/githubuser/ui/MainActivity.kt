@@ -1,14 +1,21 @@
 package com.ardine.githubuser.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ardine.githubuser.R
 import com.ardine.githubuser.adapter.UserListAdapter
 import com.ardine.githubuser.data.remote.response.User
 import com.ardine.githubuser.databinding.ActivityMainBinding
 import com.ardine.githubuser.model.MainViewModel
+import com.ardine.githubuser.setting.SettingActivity
+import com.ardine.githubuser.setting.SettingPreferences
+import com.ardine.githubuser.setting.dataStore
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,6 +50,32 @@ class MainActivity : AppCompatActivity() {
                     searchView.hide()
                     false
                 }
+        }
+
+        binding.searchBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menu1 -> {
+                    val intent = Intent(this,FavoriteActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.menu2 -> {
+                    val intent = Intent(this, SettingActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                else -> false
+            }
+        }
+
+        val pref = SettingPreferences.getInstance(applicationContext.dataStore)
+
+        pref.getThemeSetting().asLiveData().observe(this) { isDarkModeActive ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
         }
     }
 
