@@ -12,9 +12,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainViewModel : ViewModel() {
-    companion object{
-        private const val USERNAME = "ArdineJ"
-    }
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -50,4 +47,7 @@ class MainViewModel : ViewModel() {
         })
     }
 
+    companion object{
+        private const val USERNAME = "ArdineJ"
+    }
 }

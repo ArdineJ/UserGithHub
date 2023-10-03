@@ -23,14 +23,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailActivity : AppCompatActivity() {
 
-    companion object {
-        const val EXTRA_USERNAME = "extra_username"
-        private val TABS_TITLE = intArrayOf(
-            R.string.tab_text_1,
-            R.string.tab_text_2
-        )
-    }
-
     private lateinit var binding:ActivityDetailBinding
     private lateinit var detailViewModel: DetailViewModel
 
@@ -134,6 +126,13 @@ class DetailActivity : AppCompatActivity() {
             userFollowersCount.text = item.followers.toString()
             userFollowingCount.text = item.following.toString()
         }
+    }
+    companion object {
+        const val EXTRA_USERNAME = "extra_username"
+        private val TABS_TITLE = intArrayOf(
+            R.string.tab_text_1,
+            R.string.tab_text_2
+        )
     }
 
 }

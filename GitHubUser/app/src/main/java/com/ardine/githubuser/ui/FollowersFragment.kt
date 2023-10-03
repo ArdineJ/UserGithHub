@@ -21,10 +21,6 @@ class FollowersFragment : Fragment() {
 
     private var username: String? = null
 
-    companion object {
-        const val ARG_USERNAME = "arg_username"
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -86,9 +82,12 @@ class FollowersFragment : Fragment() {
         }
     }
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        const val ARG_USERNAME = "arg_username"
     }
 }
