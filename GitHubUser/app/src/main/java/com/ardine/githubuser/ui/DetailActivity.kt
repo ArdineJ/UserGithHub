@@ -3,6 +3,7 @@ package com.ardine.githubuser.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -117,16 +118,20 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setDataUser(item: DetailUserResponse) {
         binding.apply {
-            Glide.with(applicationContext)
-                .load(item.avatarUrl)
-                .error(R.drawable.baseline_person_24)
-                .into(imgProfileUser)
+            imgProfileUser.loadImage(item.avatarUrl)
             tvUserFullName.text = item.name
             tvUsername.text = item.login
             userFollowersCount.text = item.followers.toString()
             userFollowingCount.text = item.following.toString()
         }
     }
+
+    private fun ImageView.loadImage(url: String?) {
+        Glide.with(this.context)
+            .load(url)
+            .into(this)
+    }
+
     companion object {
         const val EXTRA_USERNAME = "extra_username"
         private val TABS_TITLE = intArrayOf(
@@ -134,5 +139,4 @@ class DetailActivity : AppCompatActivity() {
             R.string.tab_text_2
         )
     }
-
 }

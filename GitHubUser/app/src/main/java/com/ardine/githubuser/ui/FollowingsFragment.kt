@@ -38,16 +38,11 @@ class FollowingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val binding = _binding
         username = arguments?.getString(ARG_USERNAME)
-        val rvUsersFollowing = binding?.rvUsersFollowing
-
-        if (binding == null || rvUsersFollowing == null) {
-            return
-        }
+        val rvUsersFollowing = binding.rvUsersFollowing
 
         val layoutManager = LinearLayoutManager(requireActivity())
-        binding.rvUsersFollowing.layoutManager = layoutManager
+        rvUsersFollowing.layoutManager = layoutManager
 
         followingsViewModel.getFollowingUser(username)
 
@@ -56,13 +51,15 @@ class FollowingsFragment : Fragment() {
         }
 
         followingsViewModel.isfailed.observe(viewLifecycleOwner) { errorMessage ->
-            if (!errorMessage.isNullOrEmpty()) {
-                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+            errorMessage?.let {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }
         }
 
         followingsViewModel.followingUser.observe(viewLifecycleOwner) { items ->
-            binding.rvUsersFollowing.adapter = showFragmentRecycler(items)
+            items?.let {
+                rvUsersFollowing.adapter = showFragmentRecycler(it)
+            }
         }
 
     }
@@ -70,20 +67,15 @@ class FollowingsFragment : Fragment() {
     private fun showFragmentRecycler(items: List<User>?): UserListAdapter {
         val listUser = ArrayList<User>()
 
-        items?.let{
+        items?.let {
             listUser.addAll(it)
         }
         return UserListAdapter(listUser)
     }
 
     private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.progressBarFollowing.visibility = View.VISIBLE
-        } else {
-            binding.progressBarFollowing.visibility = View.GONE
-        }
+        binding.progressBarFollowing.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

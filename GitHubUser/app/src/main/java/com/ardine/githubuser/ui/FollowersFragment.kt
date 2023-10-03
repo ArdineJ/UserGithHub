@@ -46,7 +46,7 @@ class FollowersFragment : Fragment() {
             return
         }
         val layoutManager = LinearLayoutManager(requireActivity())
-        binding.rvUsersFollower.layoutManager = layoutManager
+        rvUsersFollower.layoutManager = layoutManager
 
         followersViewModel.getFollowerUser(username)
 
@@ -55,13 +55,15 @@ class FollowersFragment : Fragment() {
         }
 
         followersViewModel.isfailed.observe(viewLifecycleOwner) { errorMessage ->
-            if (!errorMessage.isNullOrEmpty()) {
-                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+            errorMessage?.let {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }
         }
 
         followersViewModel.followerUser.observe(viewLifecycleOwner) { items ->
-            binding.rvUsersFollower.adapter = showFragmentRecycler(items)
+            items?.let {
+                rvUsersFollower.adapter = showFragmentRecycler(it)
+            }
         }
     }
 
@@ -75,11 +77,7 @@ class FollowersFragment : Fragment() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.progressBarFollower.visibility = View.VISIBLE
-        } else {
-            binding.progressBarFollower.visibility = View.GONE
-        }
+        binding.progressBarFollower.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {
