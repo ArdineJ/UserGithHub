@@ -58,6 +58,15 @@ class DetailActivity : AppCompatActivity() {
         detailViewModel.detailUser.observe(this){ item ->
            setDataUser(item)
             if (username != null) {
+                favoriteViewModel.getClickedUser(username).observe(this) { user ->
+                    if (user != null) {
+                        isFavorite = true
+                        btnFavorite.setImageResource(R.drawable.ic_heart_pink)
+                    } else {
+                        isFavorite = false
+                        btnFavorite.setImageResource(R.drawable.ic_heart_black_outline)
+                    }
+                }
 
                 binding.btnShare.setOnClickListener {
                     val share = Intent(Intent.ACTION_SEND)

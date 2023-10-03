@@ -63,6 +63,7 @@ class FollowersFragment : Fragment() {
                 Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
             }
         }
+
         followersViewModel.followerUser.observe(viewLifecycleOwner) { items ->
             binding.rvUsersFollower.adapter = showFragmentRecycler(items)
         }
